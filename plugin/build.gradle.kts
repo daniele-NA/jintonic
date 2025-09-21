@@ -1,4 +1,4 @@
-@file:Suppress("NewerVersionAvailable","AndroidGradlePluginVersion")
+@file:Suppress("AndroidGradlePluginVersion","NewerVersionAvailable")
 plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
