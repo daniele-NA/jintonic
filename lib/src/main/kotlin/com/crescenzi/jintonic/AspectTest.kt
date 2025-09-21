@@ -4,8 +4,8 @@ package com.crescenzi.jintonic
 
 import com.crescenzi.jintonic.logger.LOG
 import org.aspectj.lang.JoinPoint
-import org.aspectj.lang.annotation.Aspect
-import org.aspectj.lang.annotation.Before
+import org.aspectj.lang.ProceedingJoinPoint
+import org.aspectj.lang.annotation.*
 
 
 @Aspect
@@ -18,9 +18,10 @@ class AspectTest {
 
      */
 
-    @Before("execution(@com.crescenzi.jintonic.DebugLog * *(..))")
-    fun debug_log(joinPoint: JoinPoint){
-        LOG("Debug Log Detected")
+    @Around("execution(@com.crescenzi.jintonic.DebugLog * *(..))")
+    fun debug_log(proceedingJoinPoint: ProceedingJoinPoint){
+        LOG("LOG Before proceed()")
+        proceedingJoinPoint.proceed()
     }
 
 

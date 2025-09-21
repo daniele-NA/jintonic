@@ -1,6 +1,7 @@
 package com.crescenzi.jintonic
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,12 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 
+
 class MainActivity : ComponentActivity() {
 
 
     @DebugLog
     fun hello() {
-
+        Log.e("JINTONIC-TEST","hello")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

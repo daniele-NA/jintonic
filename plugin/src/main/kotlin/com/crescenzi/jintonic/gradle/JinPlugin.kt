@@ -1,22 +1,16 @@
 package com.crescenzi.jintonic.gradle
 
-import com.android.build.gradle.AppExtension
-import com.android.build.gradle.AppPlugin
-import com.android.build.gradle.BaseExtension
-import com.android.build.gradle.DynamicFeaturePlugin
-import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.LibraryPlugin
+import com.android.build.gradle.*
 import com.android.build.gradle.tasks.ExtractAnnotations
-import org.gradle.api.Action
-import org.gradle.api.GradleException
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.api.Task
+import com.crescenzi.jintonic.gradle.core.Values
+import com.crescenzi.jintonic.gradle.extension.*
+import org.gradle.api.*
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.Directory
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.compile.AbstractCompile
+import org.gradle.internal.extensions.stdlib.capitalized
 import org.gradle.testing.jacoco.tasks.JacocoReport
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -32,17 +26,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  *      4. Be registered as a bytcode generator so that Android recognizes the custom AOP weaving as a formal step
  *         in the build pipeline.
  */
+@Suppress("unused")
 class JinPlugin : Plugin<Project> {
-    private companion object {
-        private const val MISSING_PLUGIN_ERROR = "'com.android.application' or 'com.android.library' plugin required."
-        private const val ANDROID_EXTENSION_NAME = "android"
-        private const val ANDROID_JAR_TEMPLATE = "%s/platforms/%s/android.jar"
-        private const val PRE_WEAVE_DIR_TEMPLATE = "preWeave/%s/%s"
-        private const val POST_WEAVE_DIR_TEMPLATE = "postWeave/%s"
-        private const val PATTERN_ORIGINAL_KOTLINC_OUTPUT_DIR = "tmp/kotlin-classes/"
-        private const val AOP_WEAVE_TASK = "aopWeave%s"
-        private const val AOP_LOG = "aop.log"
-    }
+
 
     override fun apply(project: Project) {
         val isAndroid = project.plugins.hasPlugin(AppPlugin::class.java)
@@ -50,7 +36,7 @@ class JinPlugin : Plugin<Project> {
         val isDynamicLibrary = project.plugins.hasPlugin(DynamicFeaturePlugin::class.java)
 
         if (!isAndroid && !isLibrary && !isDynamicLibrary) {
-            throw GradleException(MISSING_PLUGIN_ERROR)
+            throw GradleException(Values.MISSING_PLUGIN_ERROR)
         }
 
         /**
@@ -60,20 +46,16 @@ class JinPlugin : Plugin<Project> {
             if (project.plugins.hasPlugin("org.jetbrains.kotlin.android")) {
                 project.tasks.withType(KotlinCompile::class.java).configureEach {
                     val args = kotlinOptions.freeCompilerArgs.toMutableList()
-                    args.add("-Xsam-conversions=class")
+                    args.add(Values.ADDITIONAL_COMPILER_FLAG_1)
                     kotlinOptions.freeCompilerArgs = args
-                    println("Applied Kotlin compiler flag: -Xsam-conversions=class to ${name}")
+
+                    project.aopLog("Applied (${Values.ADDITIONAL_COMPILER_FLAG_1}) to: $name")
                 }
             }
         }
 
-
-
-
-        project.aopLog("Plugin started.")
-
         val extension = project.extensions.create(AopWeaveExtension.AOP_WEAVE_EXTENSION, AopWeaveExtension::class.java)
-        val android = project.extensions.findByName(ANDROID_EXTENSION_NAME) as BaseExtension
+        val android = project.extensions.findByName(Values.ANDROID_EXTENSION_NAME) as BaseExtension
         project.aopLog("projectId: $$project")
         project.afterEvaluate {
             val variants = if (isAndroid or isDynamicLibrary) {
@@ -85,24 +67,24 @@ class JinPlugin : Plugin<Project> {
             variants.forEach { variant ->
                 // Various strings in different case forms which we'll need when creating directories, or finding
                 // tasks.
-                val javaLangLowercase = LANG_JAVA.toLowerCase()
-                val kotlinLangLowercase = LANG_KOTLIN.toLowerCase()
+                val javaLangLowercase = Values.LANG_JAVA.lowercase()
+                val kotlinLangLowercase = Values.LANG_KOTLIN.lowercase()
                 val variantNameLowercase = variant.name
-                val variantNameCapitalized = variant.name.capitalize()
+                val variantNameCapitalized = variant.name.capitalized()
 
                 // We will configure the Kotlin and Java compilation tasks to output classes into "pre-weave"
                 // directories.
                 val preWeaveJavaDir = project.layout
                     .buildDirectory
-                    .dir(PRE_WEAVE_DIR_TEMPLATE.format(variantNameLowercase, javaLangLowercase))
+                    .dir(Values.PRE_WEAVE_DIR_TEMPLATE.format(variantNameLowercase, javaLangLowercase))
                 val preWeaveKotlinDir = project.layout
                     .buildDirectory
-                    .dir(PRE_WEAVE_DIR_TEMPLATE.format(variantNameLowercase, kotlinLangLowercase))
+                    .dir(Values.PRE_WEAVE_DIR_TEMPLATE.format(variantNameLowercase, kotlinLangLowercase))
 
                 // This is where we will output woven Kotlin and Java classes.
                 val postWeaveDir = project.layout
                     .buildDirectory
-                    .dir(POST_WEAVE_DIR_TEMPLATE.format(variantNameLowercase))
+                    .dir(Values.POST_WEAVE_DIR_TEMPLATE.format(variantNameLowercase))
                 project.aopLog("output dir ${postWeaveDir.get().asFile.absolutePath}")
                 // Now we'll acquire the Task providers for the compilation steps, as well as our own custom weave
                 // task. Task providers allow us to tell Gradle how we will want the tasks to be configured and executed,
@@ -111,7 +93,7 @@ class JinPlugin : Plugin<Project> {
                 val javaCompileProvider = project.javaCompileTaskProvider(variantNameCapitalized)
                 val kaptTaskProvider = project.kaptTaskProvider(variantNameCapitalized)
                 val aopWeaveProvider = project.tasks
-                    .register(AOP_WEAVE_TASK.format(variantNameCapitalized), AopWeaveTask::class.java)
+                    .register(Values.AOP_WEAVE_TASK.format(variantNameCapitalized), JinTask::class.java)
                 val jacocoReportTaskProvider = project.jacocoReportTaskProvider(variantNameCapitalized)
                 val extractAnnotationsTaskProvider = project.extractAnnotationsTaskProvider(variantNameCapitalized)
 
@@ -144,7 +126,7 @@ class JinPlugin : Plugin<Project> {
                 }
 
                 // We'll need this jar for weaving.
-                val androidJarPath = ANDROID_JAR_TEMPLATE.format(
+                val androidJarPath =Values. ANDROID_JAR_TEMPLATE.format(
                     android.sdkDirectory.absolutePath,
                     android.compileSdkVersion
                 )
@@ -227,7 +209,7 @@ class JinPlugin : Plugin<Project> {
 
     /**
      * Configure the JacocoReport task's class directories to include the post-weave directory we've defined here.
-     * Our Jacoco plugin, [JacocoAndroidUnitTestReportExtension], uses the class directories to generate it's report.
+     * Our Jacoco plugin, [com.hiya.plugins.JacocoAndroidUnitTestReportExtension], uses the class directories to generate it's report.
      * When our post-weave directories are not included, the generated report is empty.
      */
     private fun configureJacocoReportTask(
@@ -235,18 +217,18 @@ class JinPlugin : Plugin<Project> {
         postWeaveDir: Provider<Directory>
     ) {
         jacocoReportTaskProvider.configure {
-//            val jacocoExt = project.jacocoAndroidReportExtension()
-//
-//            if (jacocoExt != null) {
-//                // This file tree represents the post-weave directory we've
-//                // defined, along with the excludes we set for the Jacoco project
-//                val postWeaveFiltered = project.fileTree(postWeaveDir).apply {
-//                    setExcludes(jacocoExt.excludes)
-//                }
-//                // Re-set the Jacoco task's class directories to include our post-weave directory with our desired
-//                // excludes
-//                classDirectories.setFrom(classDirectories + postWeaveFiltered)
-//            }
+            val jacocoExt = project.jacocoAndroidReportExtension()
+
+            if (jacocoExt != null) {
+                // This file tree represents the post-weave directory we've
+                // defined, along with the excludes we set for the Jacoco project
+                val postWeaveFiltered = project.fileTree(postWeaveDir).apply {
+                    setExcludes(jacocoExt.excludes)
+                }
+                // Re-set the Jacoco task's class directories to include our post-weave directory with our desired
+                // excludes
+                classDirectories.setFrom(classDirectories + postWeaveFiltered)
+            }
         }
     }
 
@@ -277,7 +259,7 @@ class JinPlugin : Plugin<Project> {
         extractAnnotationsProvider.configure {
             doFirst {
                 classpath.files.forEach {
-                    if (it.path.contains(PATTERN_ORIGINAL_KOTLINC_OUTPUT_DIR) && !it.exists()) {
+                    if (it.path.contains(Values.PATTERN_ORIGINAL_KOTLINC_OUTPUT_DIR) && !it.exists()) {
                         it.mkdirs()
                     }
                 }
@@ -293,7 +275,7 @@ class JinPlugin : Plugin<Project> {
         variantNameCapitalized: String,
         javaCompileProvider: TaskProvider<Task>?,
         kotlinCompileProvider: TaskProvider<Task>?,
-        aopWeaveProvider: TaskProvider<AopWeaveTask>,
+        aopWeaveProvider: TaskProvider<JinTask>,
         androidJarPath: String,
         preWeaveJavaDir: Provider<Directory>,
         preWeaveKotlinDir: Provider<Directory>,
@@ -315,7 +297,7 @@ class JinPlugin : Plugin<Project> {
             classPathResolver = { gatherClasspaths(project, variantNameCapitalized) }
             bootClassPath = project.files(androidJarPath)
             outputDir = postWeaveDir.get().asFile
-            logPath = project.layout.buildDirectory.file(AOP_LOG).get().asFile
+            logPath = project.layout.buildDirectory.file(Values.AOP_LOG).get().asFile
 
             val dependencies = when {
                 ((javaCompileProvider != null) && (kotlinCompileProvider != null)) -> {
@@ -425,4 +407,11 @@ class JinPlugin : Plugin<Project> {
             cleanUpAfterWeaving(compileTask, preWeaveDir)
         }
     }
+}
+open class AopWeaveExtension {
+    companion object {
+        const val AOP_WEAVE_EXTENSION = "aopWeave"
+    }
+
+    var filter = ""
 }

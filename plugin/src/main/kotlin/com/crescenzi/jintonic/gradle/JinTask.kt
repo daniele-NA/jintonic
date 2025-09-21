@@ -1,21 +1,15 @@
 package com.crescenzi.jintonic.gradle
 
+import com.crescenzi.jintonic.gradle.executor.Executor
+import com.crescenzi.jintonic.gradle.extension.aopLog
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.file.FileCollection
-import org.gradle.api.tasks.CacheableTask
-import org.gradle.api.tasks.Classpath
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.Internal
-import org.gradle.api.tasks.OutputDirectory
-import org.gradle.api.tasks.PathSensitive
-import org.gradle.api.tasks.PathSensitivity
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.*
 import java.io.File
 
 @CacheableTask
-open class AopWeaveTask : DefaultTask() {
+open class JinTask : DefaultTask() {
     // Using this as a Gradle cache busting strategy. Increment this value if needed to prevent an older weave cache
     // entry from getting picked up, despite new logic existing.
     @Input
@@ -52,12 +46,12 @@ open class AopWeaveTask : DefaultTask() {
     
     @TaskAction
     fun weave() {
-        if (inPath!!.isEmpty()) {
+        if (inPath!!.isEmpty) {
             project.aopLog("No classes found. Will skip.")
             return
         }
         
-        AspectJExecutor(
+        Executor(
             inPath = inPath!!.asPath,
             aspectPath = aspectPath!!.asPath,
             outputDir = outputDir!!.absolutePath,

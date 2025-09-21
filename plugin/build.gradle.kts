@@ -18,7 +18,7 @@ repositories {
 dependencies {
     implementation("com.android.tools.build:gradle:8.1.0")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
-    //implementation("com.hiya:jacoco-android:0.2")
+    implementation("com.hiya:jacoco-android:0.2")
     implementation("org.aspectj:aspectjtools:1.9.7")
     implementation("org.aspectj:aspectjrt:1.9.7")
 }
