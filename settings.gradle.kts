@@ -26,3 +26,4 @@ dependencyResolutionManagement {
 rootProject.name = "jintonic"
 include(":test")
 include(":lib")
+includeBuild("plugin")  // PLUGIN

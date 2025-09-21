@@ -1,11 +1,9 @@
-@file:Suppress("UnstableApiUsage","UNCHECKED_CAST")
-//noinspection UseTomlInstead
+@file:Suppress("UnstableApiUsage","UNCHECKED_CAST","UseTomlInstead")
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
-
-    id("com.ibotta.gradle.aop") version "1.4.1"
+    id("com.crescenzi.jintonic.gradle")  // TRANSITIVE
 }
 
 android {
@@ -36,7 +34,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = rootProject.extra["jvm_version"] as String
-        freeCompilerArgs += rootProject.extra["compiler_args"] as List<String>
     }
     buildFeatures {
         compose = true
