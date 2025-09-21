@@ -1,4 +1,4 @@
-//noinspection AndroidGradlePluginVersion,noinspection NewerVersionAvailable
+@file:Suppress("AndroidGradlePluginVersion","NewerVersionAvailable")
 plugins {
     id("com.android.application") version "8.1.2" apply false
     id("org.jetbrains.kotlin.android") version "2.2.10" apply false
@@ -17,6 +17,4 @@ gradle.rootProject {
     ext["jvm_version"] = "17"
 
     ext["package"] = "com.crescenzi.jintonic"
-
-    ext["compiler_args"] = listOf("-Xsam-conversions=class")
 }

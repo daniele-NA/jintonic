@@ -1,7 +1,14 @@
-@file:Suppress("unused","FunctionName")
+@file:Suppress("unused", "FunctionName")
 
 package com.crescenzi.jintonic
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import androidx.annotation.RequiresPermission
 import com.crescenzi.jintonic.logger.LOG
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.ProceedingJoinPoint
@@ -11,6 +18,8 @@ import org.aspectj.lang.annotation.*
 @Aspect
 class AspectTest {
 
+    private
+
 
     /* CLASSI:
     @Before("within(@com.crescenzi.jintonic.DebugLog *)")
@@ -19,9 +28,31 @@ class AspectTest {
      */
 
     @Around("execution(@com.crescenzi.jintonic.DebugLog * *(..))")
-    fun debug_log(proceedingJoinPoint: ProceedingJoinPoint){
+    fun debug_log(proceedingJoinPoint: ProceedingJoinPoint) {
         LOG("LOG Before proceed()")
         proceedingJoinPoint.proceed()
+    }
+
+    @SuppressLint("PrivateApi")
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    @Before("execution(@com.crescenzi.jintonic.RequireNetwork * *(..))")
+    fun check_network(joinPoint: JoinPoint) {
+
+
+        val activityThreadClass = Class.forName("android.app.ActivityThread")
+        val currentActivityThread = activityThreadClass.getMethod("currentActivityThread").invoke(null)
+        val context = activityThreadClass.getMethod("getApplication").invoke(currentActivityThread) as? Application
+
+        val connectivityManager =
+            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network =
+            connectivityManager.activeNetwork ?: throw IllegalStateException("No internet")
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
+            ?: throw IllegalStateException("No internet")
+        // Controlla che la rete abbia accesso a Internet
+        if (!capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ||
+            !capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+        ) throw IllegalStateException("No internet")
     }
 
 
