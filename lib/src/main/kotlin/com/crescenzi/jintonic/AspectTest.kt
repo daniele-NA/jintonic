@@ -18,7 +18,22 @@ import org.aspectj.lang.annotation.*
 @Aspect
 class AspectTest {
 
-    private
+
+    /*
+
+    JinTonic.checkNetwork().requireBattery(20).execute { apiCall() }
+
+
+     */
+
+
+    private val application: Application?
+
+    init {
+        val activityThreadClass = Class.forName("android.app.ActivityThread")
+        val currentActivityThread = activityThreadClass.getMethod("currentActivityThread").invoke(null)
+        application = activityThreadClass.getMethod("getApplication").invoke(currentActivityThread) as? Application
+    }
 
 
     /* CLASSI:
@@ -37,19 +52,12 @@ class AspectTest {
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     @Before("execution(@com.crescenzi.jintonic.RequireNetwork * *(..))")
     fun check_network(joinPoint: JoinPoint) {
-
-
-        val activityThreadClass = Class.forName("android.app.ActivityThread")
-        val currentActivityThread = activityThreadClass.getMethod("currentActivityThread").invoke(null)
-        val context = activityThreadClass.getMethod("getApplication").invoke(currentActivityThread) as? Application
-
         val connectivityManager =
-            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            application?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network =
             connectivityManager.activeNetwork ?: throw IllegalStateException("No internet")
         val capabilities = connectivityManager.getNetworkCapabilities(network)
             ?: throw IllegalStateException("No internet")
-        // Controlla che la rete abbia accesso a Internet
         if (!capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ||
             !capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
         ) throw IllegalStateException("No internet")
