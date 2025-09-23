@@ -13,6 +13,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,6 +51,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+
+                    var isError by rememberSaveable { mutableStateOf(false) }
+
+
+
                     Column(
                         modifier = Modifier
                             .padding(innerPadding)
@@ -54,14 +63,19 @@ class MainActivity : ComponentActivity() {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        Text(text = "Hello From Jintonic Test", color = Color.Green)
+                        if (isError) {
+                            Text(text = "Eccezione", color = Color.Red)
+                        } else {
+                            Text(text = "Tutto ok", color = Color.Green)
+                        }
 
 
                         Button(onClick = {
                             try {
                                 apiCall()
                             } catch (e: Exception) {
-                                LOG("Exception by aspect caused internet ${e.message.toString()}")
+                                isError = true
+                                LOG("Exception by aspect caused by ${e.message.toString()}")
                             }
                         }) {
                             Text("Click for Api Call ")
