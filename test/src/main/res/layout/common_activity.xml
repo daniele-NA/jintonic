@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="60dp">
+
+    <!-- Testo che mostra stato -->
+    <TextView
+        android:id="@+id/activityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingBottom="16dp"
+        android:text="You're on x Activity"
+
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="18sp" />
+
+    <!-- Bottone centrale -->
+    <Button
+        android:id="@+id/apiButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click for Api Call" />
+
+    <Button
+        android:id="@+id/activityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:layout_weight="0.5"
+        android:background="@android:color/holo_blue_bright"
+        android:paddingHorizontal="10dp"
+        android:text="Go to another activity" />
+
+</LinearLayout>

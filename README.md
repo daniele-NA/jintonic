@@ -27,3 +27,27 @@
 | `..`                               | “zero o più” package o argomenti                    | `com..*` = qualsiasi sottopacchetto             |
 
 ---
+
+
+root:
+
+
+buildscript {
+repositories {
+google()
+mavenCentral()
+maven("https://jitpack.io")
+}
+dependencies {
+classpath("com.ibotta:plugin:1.4.1")
+}
+}
+
+
+module:
+
+apply(plugin = "com.ibotta.gradle.aop")
+
+STANDALONE :
+
+    //id("com.ibotta.gradle.aop") version "1.4.1"
