@@ -6,9 +6,7 @@ import static com.crescenzi.jintonic.KotlinActivityKt.LOG;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +15,7 @@ public class JavaActivity extends AppCompatActivity {
 
     @RequireNetwork
     void javaApiCall(){
-        LOG("Java Api call done successfully");
+        LOG("Java Api Call done successfully");
     }
 
     @Override
