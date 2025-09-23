@@ -14,7 +14,12 @@ import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.*
 
-
+/**
+ *
+ *
+ * QUANDO CAMBI NOMI,VEDI I PROGUARD !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *
+ */
 @Aspect
 class AspectTest {
 
