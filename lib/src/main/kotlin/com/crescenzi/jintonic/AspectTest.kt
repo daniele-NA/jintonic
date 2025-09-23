@@ -23,7 +23,6 @@ class AspectTest {
 
     JinTonic.checkNetwork().requireBattery(20).execute { apiCall() }
 
-
      */
 
 

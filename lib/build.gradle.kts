@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = rootProject.extra["package"] as String
+    namespace = ("${rootProject.extra["package"] as String}.lib")
     compileSdk = rootProject.extra["compile_version"] as Int
 
     defaultConfig {

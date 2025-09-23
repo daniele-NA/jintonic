@@ -35,6 +35,12 @@ class MainActivity : ComponentActivity() {
         LOG("hello")
     }
 
+    override fun onStart() {
+
+        super.onStart()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

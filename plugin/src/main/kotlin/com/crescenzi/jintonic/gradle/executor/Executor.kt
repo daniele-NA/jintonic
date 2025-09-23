@@ -11,52 +11,64 @@ import kotlin.concurrent.withLock
 /**
  * A wrapper around the AspectJ weaver to make it a little easier to work with.
  */
+
+@JvmInline
+value class TargetPath(val value: String)
+@JvmInline
+value class AspectPath(val value: String)
+@JvmInline
+value class OutputPath(val value: String)
+@JvmInline
+value class LogPath(val value: String)
+@JvmInline
+value class ClassPath(val value: String)
+@JvmInline
+value class BootClassPath(val value: String)
 class Executor(
-    private val inPath: String,
-    private val aspectPath: String,
-    private val outputDir: String,
-    private val logPath: String,
-    private val classPath: String,
-    private val bootClassPath: String,
+    private val targetPath: TargetPath,
+    private val aspectPath: AspectPath,
+    private val outputPath: OutputPath,
+    private val logPath: LogPath,
+    private val classPath: ClassPath,
+    private val bootClassPath: BootClassPath,
     private val logger: Logger
 ) {
     companion object {
         internal val lock = ReentrantLock()
     }
 
+
     fun execute() {
-        val args = arrayOf(
+        val compilerArgs = arrayOf<String>(
             Values.CMD_SHOW_WEAVE_INFO,
             Values.CMD_JAVA_1_8,
-            // This path should include classes that the Aspects might act on. For us,
-            // this means files that use our own AOP annotations.
-            Values.CMD_IN_PATH,
-            inPath,
-            // This path should include classes that have Aspects.
-            Values.CMD_ASPECT_PATH,
-            aspectPath,
-            // Weave output directory.
-            Values.CMD_OUTPUT_DIR,
-            outputDir,
-            // The classpath can just be the same as the one used to compile our files.
-            Values.CMD_CLASS_PATH,
-            classPath,
-            // Useful log output! Will show weaving issues (if any), and will tell the
-            // story of what classes were woven. Look for this log in
-            // <project-root>/build.
-            Values.CMD_LOG,
-            logPath,
-            // I think this is the classpath that the ajc (AspectJ compiler) needs to
-            // do its thing. DON'T CHANGE.
-            Values.CMD_BOOT_CLASS_PATH,
-            bootClassPath
+
+            Values.CMD_IN_PATH, // Files that use our own AOP annotations.
+            targetPath.value,
+
+            Values.CMD_ASPECT_PATH, // This path should include classes that have Aspects.
+            aspectPath.value,
+
+            Values.CMD_OUTPUT_DIR, // Weave output directory.
+            outputPath.value,
+
+            Values.CMD_CLASS_PATH, // The classpath can just be the same as the one used to compile our files.
+            classPath.value,
+
+            Values.CMD_LOG, // Look for this log in <project-root>/build.
+            logPath.value,
+
+            Values.CMD_BOOT_CLASS_PATH, // DON'T CHANGE
+            bootClassPath.value
         )
 
-        // Use a lock to prevent concurrent AspectJ runs from occurring. AspectJ does not appear to be thread safe,
-        // and concurrency was causing random build failures as well as weaving failures.
+        /* ====
+        Use a lock to prevent concurrent AspectJ runs from occurring. AspectJ does not appear to be thread safe
+        Concurrency was causing random build failures as well as weaving failures
+          ==== */
         lock.withLock {
             val handler = MessageHandler(true)
-            Main().run(args, handler)
+            Main().run(compilerArgs, handler)
 
             handler.getMessages(null, true).forEach {
                 when (it.kind) {

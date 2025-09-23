@@ -11,16 +11,16 @@ internal object Values {
 
 
     // === PLUGIN === //
-    internal const val MISSING_PLUGIN_ERROR = "'com.android.application' or 'com.android.library' plugin required."
     internal const val ANDROID_EXTENSION_NAME = "android"
     internal const val ANDROID_JAR_TEMPLATE = "%s/platforms/%s/android.jar"
     internal const val PRE_WEAVE_DIR_TEMPLATE = "sober/%s/%s"
     internal const val POST_WEAVE_DIR_TEMPLATE = "drunk/%s"
-    internal const val PATTERN_ORIGINAL_KOTLINC_OUTPUT_DIR = "tmp/kotlin-classes/"
+    internal const val PATTERN_ORIGINAL_KOTLINC_OUTPUT_DIR = "tmp/kotlin-classes/" // WORK-AROUND
     internal const val AOP_WEAVE_TASK = "aopWeave%s"
     internal const val AOP_LOG = "jintonic.log"
-    internal const val LANG_JAVA = "Java"
-    internal const val LANG_KOTLIN = "Kotlin"
+    internal const val LANG_JAVA = "java"
+    internal const val LANG_KOTLIN = "kotlin"
+    internal const val AOP_WEAVE_EXTENSION = "aopWeave"
 
 
     // === FUNCTIONS === //

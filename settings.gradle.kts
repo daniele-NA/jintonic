@@ -27,4 +27,4 @@ dependencyResolutionManagement {
 rootProject.name = "jintonic"
 include(":test")
 include(":lib")
-includeBuild("plugin")  // PLUGIN
+includeBuild("plugin")  // STANDALONE GRADLE TASKS
