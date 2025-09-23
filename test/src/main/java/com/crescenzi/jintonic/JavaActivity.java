@@ -1,6 +1,6 @@
 package com.crescenzi.jintonic;
 
-import static com.crescenzi.jintonic.KotlinActivity.kotlinApiCall;
+
 import static com.crescenzi.jintonic.KotlinActivityKt.LOG;
 
 import android.annotation.SuppressLint;
