@@ -1,6 +1,5 @@
-package com.crescenzi.jintonic
-
+package com.crescenzi.jintonic.project.profiling
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class DebugLog
+annotation class Timed

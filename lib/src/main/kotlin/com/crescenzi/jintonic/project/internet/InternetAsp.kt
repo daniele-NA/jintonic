@@ -28,7 +28,7 @@ import org.aspectj.lang.annotation.Before
 
  */
 @Aspect
-class Internet {
+class InternetAsp {
 
     var mustThrow: Boolean = defaultValueForThrowParam
 

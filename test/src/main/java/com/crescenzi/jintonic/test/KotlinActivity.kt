@@ -12,27 +12,26 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.crescenzi.jintonic.DebugLog
 import com.crescenzi.jintonic.project.internet.RequireInternet
+import com.crescenzi.jintonic.project.profiling.Timed
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
-fun LOG(value: String?) {
+internal fun LOG(value: String?) {
     Log.e("MY-LOG", value.toString())
 }
 
 class KotlinActivity : AppCompatActivity() {
 
 
-    companion object {
-        @JvmStatic
-        @RequireInternet
-        fun kotlinApiCall() {
-            LOG("Kotlin Api call done successfully")
-        }
+    @RequireInternet
+    fun kotlinApiCall() {
+        LOG("Kotlin Api call done successfully")
     }
 
-    @DebugLog
-    fun hello() {
-        LOG("hello")
+    @Timed
+    fun hello() = runBlocking{
+        delay(5000)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +50,8 @@ class KotlinActivity : AppCompatActivity() {
                 Toast.makeText(this, "Post api call", Toast.LENGTH_SHORT).show()
                 activityTitle.text = "Alright"
                 activityTitle.setTextColor(getColor(android.R.color.holo_green_dark))
+                hello()
+
             } catch (e: Exception) {
                 activityTitle.text = "Exception"
                 activityTitle.setTextColor(getColor(android.R.color.holo_red_dark))
