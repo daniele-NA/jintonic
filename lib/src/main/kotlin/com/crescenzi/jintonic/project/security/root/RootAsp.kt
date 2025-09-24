@@ -1,6 +1,7 @@
 @file:Suppress("unused")
 package com.crescenzi.jintonic.project.security.root
 
+import com.crescenzi.jintonic.common.LOG_INFO
 import com.crescenzi.jintonic.common.Values.id
 import com.crescenzi.jintonic.common.extension.getJintonicDecorator
 import com.crescenzi.jintonic.data.DeviceRepo
@@ -17,6 +18,9 @@ class RootAsp {
 
     // We check it one time
     val isRooted = isRooted(DeviceRepo.application)
+    init {
+        LOG_INFO("DEVICE ROOTED : $isRooted")
+    }
 
     @Before("execution(@$id.project.security.root.WithRoot * *(..))")
     fun checkRoot(joinPoint: JoinPoint) {

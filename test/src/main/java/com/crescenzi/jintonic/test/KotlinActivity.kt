@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.crescenzi.jintonic.domain.exceptions.JintonicException
 import com.crescenzi.jintonic.project.internet.status.RequireInternet
 import com.crescenzi.jintonic.project.profiling.time.Timed
 import com.crescenzi.jintonic.project.security.root.WithRoot
@@ -33,7 +34,7 @@ class KotlinActivity : AppCompatActivity() {
         delay(5000)
     }
 
-    @WithRoot(forRoot = true)
+    @WithRoot(forRoot = false)
     fun rootMethod() {
         LOG("Dentro root method")
     }
@@ -44,20 +45,22 @@ class KotlinActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.common_activity)
 
+
         val activityTitle = findViewById<TextView>(R.id.activityTitle)
         val apiButton = findViewById<Button>(R.id.apiButton)
         val activityButton = findViewById<Button>(R.id.activityButton)
         activityTitle.text = "KOTLIN Activity"
         apiButton.setOnClickListener {
             try {
+                rootMethod()
                 // LOG("Risultato della apiCall() => ${kotlinApiCall()}")
                 activityTitle.text = "Alright"
                 activityTitle.setTextColor(getColor(android.R.color.holo_green_dark))
-                rootMethod()
-            } catch (e: Exception) {
+
+            } catch (je: JintonicException) {
                 activityTitle.text = "Exception"
                 activityTitle.setTextColor(getColor(android.R.color.holo_red_dark))
-                LOG("Exception ${e.message.toString()}")
+                LOG("Exception ${je.message.toString()}")
             }
         }
 

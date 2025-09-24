@@ -4,9 +4,20 @@ package com.crescenzi.jintonic.project.security.root
 @Retention(AnnotationRetention.RUNTIME)
 
 /**
-REQUIRE MANIFEST PERMISSIONS:
+REQUIRE MANIFEST QUERIES:
 
-<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+<!--
+Only checks whether certain known root apps are installed. Ignores the authorization (which scans all packages), which may be rejected by the store.
+-->
+
+<queries>
+    <package android:name="com.noshufou.android.su" />
+    <package android:name="com.thirdparty.superuser" />
+    <package android:name="eu.chainfire.supersu" />
+    <package android:name="com.koushikdutta.superuser" />
+    <package android:name="com.zachspong.temprootremovejb" />
+    <package android:name="com.ramdroid.appquarantine" />
+</queries>
 
 
 Checks if the device is rooted before executing the annotated method.

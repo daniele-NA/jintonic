@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+
+    <queries>
+        <package android:name="com.noshufou.android.su" />
+        <package android:name="com.thirdparty.superuser" />
+        <package android:name="eu.chainfire.supersu" />
+        <package android:name="com.koushikdutta.superuser" />
+        <package android:name="com.zachspong.temprootremovejb" />
+        <package android:name="com.ramdroid.appquarantine" />
+    </queries>
 
     <application
         android:icon="@drawable/logo"
         android:label="jintonic"
+        android:banner="@drawable/logo"
         android:theme="@style/android:Theme.Material.Light.NoActionBar">
         <activity
             android:name=".KotlinActivity"
@@ -14,6 +31,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".JavaActivity" />
