@@ -12,8 +12,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.crescenzi.jintonic.project.internet.RequireInternet
-import com.crescenzi.jintonic.project.profiling.Timed
+import com.crescenzi.jintonic.project.internet.status.RequireInternet
+import com.crescenzi.jintonic.project.profiling.time.Timed
+import com.crescenzi.jintonic.project.security.root.WithRoot
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
@@ -24,14 +25,17 @@ internal fun LOG(value: String?) {
 class KotlinActivity : AppCompatActivity() {
 
 
-    @RequireInternet
-    fun kotlinApiCall() {
-        LOG("Kotlin Api call done successfully")
-    }
+    @RequireInternet(mustThrow = true)
+    fun kotlinApiCall() = "Kotlin Api call done successfully"
 
     @Timed
-    fun hello() = runBlocking{
+    fun hello() = runBlocking {
         delay(5000)
+    }
+
+    @WithRoot(forRoot = true)
+    fun rootMethod() {
+        LOG("Dentro root method")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,16 +50,14 @@ class KotlinActivity : AppCompatActivity() {
         activityTitle.text = "KOTLIN Activity"
         apiButton.setOnClickListener {
             try {
-                kotlinApiCall()
-                Toast.makeText(this, "Post api call", Toast.LENGTH_SHORT).show()
+                // LOG("Risultato della apiCall() => ${kotlinApiCall()}")
                 activityTitle.text = "Alright"
                 activityTitle.setTextColor(getColor(android.R.color.holo_green_dark))
-                hello()
-
+                rootMethod()
             } catch (e: Exception) {
                 activityTitle.text = "Exception"
                 activityTitle.setTextColor(getColor(android.R.color.holo_red_dark))
-                Toast.makeText(this, "Inner catch", Toast.LENGTH_SHORT).show()
+                LOG("Exception ${e.message.toString()}")
             }
         }
 

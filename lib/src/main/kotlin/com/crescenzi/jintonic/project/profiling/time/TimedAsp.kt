@@ -1,6 +1,7 @@
 @file:SuppressLint("PrivateApi", "MissingPermission")
 @file:Suppress("unused", "FunctionName")
-package com.crescenzi.jintonic.project.profiling
+
+package com.crescenzi.jintonic.project.profiling.time
 
 import android.annotation.SuppressLint
 import com.crescenzi.jintonic.common.LOG_INFO
@@ -9,13 +10,11 @@ import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 
-/**
- * No Permission Required
- */
+
 @Aspect
 class TimedAsp {
 
-    @Around("execution(@$id.project.profiling.Timed * *(..))")
+    @Around("execution(@$id.project.profiling.time.Timed * *(..))")
     fun measureTime(proceedingJoinPoint: ProceedingJoinPoint): Any? {
         val start = System.currentTimeMillis()
         val result = proceedingJoinPoint.proceed()

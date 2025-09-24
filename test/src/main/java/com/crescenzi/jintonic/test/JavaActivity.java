@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-import com.crescenzi.jintonic.project.internet.RequireInternet;
+import com.crescenzi.jintonic.project.internet.status.RequireInternet;
 
 @SuppressLint("SetTextI18n")
 public class JavaActivity extends AppCompatActivity {
