@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = rootProject.extra["package"] as String
+    namespace = ("${rootProject.extra["package"] as String}.test")
     compileSdk = rootProject.extra["compile_version"] as Int
 
     defaultConfig {
-        applicationId = rootProject.extra["package"] as String
+        applicationId = ("${rootProject.extra["package"] as String}.test")
         minSdk = rootProject.extra["min_version"] as Int
         targetSdk = rootProject.extra["target_version"] as Int
         versionCode = 1

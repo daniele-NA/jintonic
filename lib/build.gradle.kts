@@ -1,4 +1,5 @@
-@file:Suppress("UnstableApiUsage","UNCHECKED_CAST","UseTomlInstead")
+@file:Suppress("UnstableApiUsage", "UNCHECKED_CAST", "UseTomlInstead")
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -6,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = ("${rootProject.extra["package"] as String}.lib")
+    namespace = rootProject.extra["package"] as String
     compileSdk = rootProject.extra["compile_version"] as Int
 
     defaultConfig {
@@ -20,10 +21,6 @@ android {
         }
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
     }
 
@@ -34,6 +31,9 @@ android {
 
     kotlinOptions {
         jvmTarget = rootProject.extra["jvm_version"] as String
+    }
+    buildFeatures {
+        buildConfig = true
     }
 
     testOptions {

@@ -1,7 +1,7 @@
 @file:SuppressLint("SetTextI18n")
 @file:Suppress("FunctionName")
 
-package com.crescenzi.jintonic
+package com.crescenzi.jintonic.test
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,7 +12,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-
+import com.crescenzi.jintonic.DebugLog
+import com.crescenzi.jintonic.project.internet.RequireInternet
 
 fun LOG(value: String?) {
     Log.e("MY-LOG", value.toString())
@@ -23,7 +24,7 @@ class KotlinActivity : AppCompatActivity() {
 
     companion object {
         @JvmStatic
-        @RequireNetwork
+        @RequireInternet
         fun kotlinApiCall() {
             LOG("Kotlin Api call done successfully")
         }

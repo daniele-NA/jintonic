@@ -1,19 +1,19 @@
-package com.crescenzi.jintonic;
+package com.crescenzi.jintonic.test;
 
 
-import static com.crescenzi.jintonic.KotlinActivityKt.LOG;
+import static com.crescenzi.jintonic.test.KotlinActivityKt.LOG;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.*;
-
 import androidx.appcompat.app.AppCompatActivity;
+import com.crescenzi.jintonic.project.internet.RequireInternet;
 
 @SuppressLint("SetTextI18n")
 public class JavaActivity extends AppCompatActivity {
 
-    @RequireNetwork
+    @RequireInternet
     void javaApiCall(){
         LOG("Java Api Call done successfully");
     }

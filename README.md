@@ -1,5 +1,50 @@
 
 
+
+
+IMMAGINE  dell'app di test,logo della libreria
+
+
+    /*
+
+    JinTonic.checkNetwork().requireBattery(20).execute { apiCall() }
+
+     */
+
+
+
+    /* CLASSI:
+    @Before("within(@com.crescenzi.jintonic.DebugLog *)")
+
+
+     */
+
+@Around("execution(@com.crescenzi.jintonic.DebugLog * *(..))")
+fun debug_log(proceedingJoinPoint: ProceedingJoinPoint) {
+LOG_E("LOG Before proceed()")
+proceedingJoinPoint.proceed()
+}
+
+//    @Before("execution(* me.crescenzi.*.*.onCreate(android.os.Bundle))")
+//    fun onCreateAdvice(joinPoint: JoinPoint?) {
+//        if (joinPoint?.getThis() != null) {
+//            LOG("Activity Event")
+//        }
+//    }
+//
+//
+//    @Pointcut("execution(void *.onClick(..))")
+//    fun onButtonClick() {
+//    }
+//
+//    @Before("onButtonClick() && args(view)")
+//    fun onClickAdvice(view: View?) {
+//        if (view is TextView) {
+//            // Logger.logItem("${view.text} clicked")
+//        }
+//    }
+
+
 # 📑 AspectJ Pointcut Cheat-Sheet
 
 | Sintassi                           | Significato                                         | Esempio                                         |

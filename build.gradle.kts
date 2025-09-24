@@ -11,7 +11,7 @@ plugins {
  * GLOBAL VARIABLES
  */
 gradle.rootProject {
-    ext["min_version"] = 26
+    ext["min_version"] = 26 // BEFORE 26 AspectJ doesn't seem to work correctly
     ext["compile_version"] = 36
     ext["target_version"] = 36
     ext["jvm_version"] = "17"
