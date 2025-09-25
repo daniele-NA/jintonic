@@ -1,4 +1,4 @@
-@file:Suppress("UnstableApiUsage","UNCHECKED_CAST","UseTomlInstead")
+@file:Suppress("UnstableApiUsage","UNCHECKED_CAST","UseTomlInstead","GradleDependency")
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
