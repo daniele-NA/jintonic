@@ -6,8 +6,6 @@ package com.crescenzi.jintonic.project.profiling.time
 /**
     NO PERMISSIONS REQUIRED
 
-No special manifest permissions are required.
-
 The method's execution is not modified; only the duration is logged.
 
  */

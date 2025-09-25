@@ -36,20 +36,20 @@ class InternetAsp {
         val network =
             connectivityManager.activeNetwork
 
-        if (network == null) return noInternet()
+        if (network == null) return noInternet(pjp.signature.name)
 
         val capabilities = connectivityManager.getNetworkCapabilities(network as Network?)
-        if (capabilities == null) return noInternet()
+        if (capabilities == null) return noInternet(pjp.signature.name)
 
         if (!capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ||
             !capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-        )return noInternet()
+        )return noInternet(pjp.signature.name)
 
         return pjp.proceed()
     }
 
-    private fun noInternet(): Nothing? {
-        if (mustThrow) drunk(message = "No Internet Available", code = JINTONIC_CODE.NO_INTERNET)
+    private fun noInternet(methodName: String): Nothing? {
+        if (mustThrow) drunk(message = "No Internet Available for $methodName ", code = JINTONIC_CODE.NO_INTERNET)
         return null
     }
 }

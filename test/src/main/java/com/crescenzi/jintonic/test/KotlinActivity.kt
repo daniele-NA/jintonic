@@ -14,6 +14,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.crescenzi.jintonic.domain.exceptions.JintonicException
 import com.crescenzi.jintonic.project.internet.status.RequireInternet
+import com.crescenzi.jintonic.project.internet.vpn.RequireVpn
 import com.crescenzi.jintonic.project.profiling.time.Timed
 import com.crescenzi.jintonic.project.security.root.WithRoot
 import kotlinx.coroutines.delay
@@ -32,6 +33,10 @@ class KotlinActivity : AppCompatActivity() {
     @Timed
     fun hello() = runBlocking {
         delay(5000)
+    }
+    @RequireVpn
+    fun vpnMethod(){
+        LOG("Executed Vpn Method")
     }
 
     @WithRoot(forRoot = false)
