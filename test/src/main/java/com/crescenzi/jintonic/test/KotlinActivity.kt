@@ -4,6 +4,7 @@
 package com.crescenzi.jintonic.test
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.crescenzi.jintonic.domain.exceptions.JintonicException
+import com.crescenzi.jintonic.project.extra.battery.MinBattery
 import com.crescenzi.jintonic.project.internet.status.RequireInternet
 import com.crescenzi.jintonic.project.internet.vpn.RequireVpn
 import com.crescenzi.jintonic.project.profiling.time.Timed
@@ -27,15 +29,18 @@ internal fun LOG(value: String?) {
 class KotlinActivity : AppCompatActivity() {
 
 
+
     @RequireInternet(mustThrow = true)
+    @MinBattery(minOrEqualValue = 60)
     fun kotlinApiCall() = "Kotlin Api call done successfully"
 
     @Timed
     fun hello() = runBlocking {
         delay(5000)
     }
+
     @RequireVpn
-    fun vpnMethod(){
+    fun vpnMethod() {
         LOG("Executed Vpn Method")
     }
 
@@ -57,8 +62,8 @@ class KotlinActivity : AppCompatActivity() {
         activityTitle.text = "KOTLIN Activity"
         apiButton.setOnClickListener {
             try {
-                rootMethod()
-                // LOG("Risultato della apiCall() => ${kotlinApiCall()}")
+                //rootMethod()
+                 LOG("Risultato della apiCall() => ${kotlinApiCall()}")
                 activityTitle.text = "Alright"
                 activityTitle.setTextColor(getColor(android.R.color.holo_green_dark))
 

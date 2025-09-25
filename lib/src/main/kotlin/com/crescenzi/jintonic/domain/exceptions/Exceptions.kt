@@ -5,7 +5,7 @@ package com.crescenzi.jintonic.domain.exceptions
 import kotlin.jvm.Throws
 
 enum class JINTONIC_CODE {
-    NO_INTERNET, GENERIC, SYSTEM,ROOTED_DEVICE,NON_ROOTED_DEVICE,VPN_REQUIRED
+    NO_INTERNET, GENERIC, SYSTEM,ROOTED_DEVICE,NON_ROOTED_DEVICE,VPN_REQUIRED,NOT_ENOUGH_BATTERY
 }
 
 @Suppress("unused")
