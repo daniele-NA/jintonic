@@ -1,5 +1,3 @@
-Ecco una bozza completa per il tuo `README.md`, concisa, chiara e in inglese, seguendo lo stile che hai richiesto:
-
 <div align="center">
     <img src="ASSETS/logo.svg" alt="Jintonic Logo" width="300" height="300" />
 </div>
