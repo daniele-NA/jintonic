@@ -1,11 +1,14 @@
 Ecco una bozza completa per il tuo `README.md`, concisa, chiara e in inglese, seguendo lo stile che hai richiesto:
 
+<div align="center">
+    <img src="ASSETS/logo.svg" alt="Jintonic Logo" width="300" height="300" />
+</div>
 ````markdown
 # Tired of the Same Old Helper Classes?  
 
 Jintonic is the **first Android library fully based on AOP (Aspect-Oriented Programming)**. It allows you to **hook and weave behavior at build time** directly into your `.class` files via Gradle plugins.  
 
-<img src="ASSETS/logo.png" alt="Jintonic Logo" />
+
 
 ---
 
