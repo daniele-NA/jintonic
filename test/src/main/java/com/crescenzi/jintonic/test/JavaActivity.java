@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.crescenzi.jintonic.project.internet.status.RequireInternet;
+import com.crescenzi.jintonic.project.security.screen.SecureWindow;
 
+@SecureWindow
 @SuppressLint("SetTextI18n")
 public class JavaActivity extends AppCompatActivity {
 

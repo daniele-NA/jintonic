@@ -2,14 +2,9 @@
 
 
 
-IMMAGINE  dell'app di test,logo della libreria
 
 
-    /*
 
-    JinTonic.checkNetwork().requireBattery(20).execute { apiCall() }
-
-     */
 
 
 

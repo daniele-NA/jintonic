@@ -4,13 +4,11 @@
 package com.crescenzi.jintonic.test
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.crescenzi.jintonic.domain.exceptions.JintonicException
@@ -19,6 +17,7 @@ import com.crescenzi.jintonic.project.internet.status.RequireInternet
 import com.crescenzi.jintonic.project.internet.vpn.RequireVpn
 import com.crescenzi.jintonic.project.profiling.time.Timed
 import com.crescenzi.jintonic.project.security.root.WithRoot
+import com.crescenzi.jintonic.project.security.screen.SecureWindow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
@@ -26,6 +25,7 @@ internal fun LOG(value: String?) {
     Log.e("MY-LOG", value.toString())
 }
 
+@SecureWindow
 class KotlinActivity : AppCompatActivity() {
 
 
