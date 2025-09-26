@@ -16,7 +16,7 @@ import com.crescenzi.jintonic.project.security.screen.SecureWindow;
 public class JavaActivity extends AppCompatActivity {
 
     @RequireInternet
-    void javaApiCall(){
+    public void javaApiCall(){
         LOG("Java Api Call done successfully");
     }
 
@@ -27,25 +27,9 @@ public class JavaActivity extends AppCompatActivity {
         setContentView(R.layout.common_activity);
 
         TextView activityTitle = findViewById(R.id.activityTitle);
-        Button apiButton = findViewById(R.id.apiButton);
         Button activityButton = findViewById(R.id.activityButton);
         activityTitle.setText("JAVA Activity");
         var context = this;
-
-        apiButton.setOnClickListener(v -> {
-            try {
-                javaApiCall();
-                Toast.makeText(context, "Post api call", Toast.LENGTH_SHORT).show();
-
-                activityTitle.setText("Alright");
-                activityTitle.setTextColor(getResources().getColor(android.R.color.holo_green_dark, null));
-            } catch (Exception e) {
-                activityTitle.setText("Exception");
-                activityTitle.setTextColor(getResources().getColor(android.R.color.holo_red_dark, null));
-                Toast.makeText(context, "Inner catch", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         activityButton.setOnClickListener(v -> {
             startActivity(new Intent(context, KotlinActivity.class));
             context.finish();

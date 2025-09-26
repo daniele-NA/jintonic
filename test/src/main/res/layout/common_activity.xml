@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="60dp">
 
-    <!-- Testo che mostra stato -->
+
     <TextView
         android:id="@+id/activityTitle"
         android:layout_width="wrap_content"
@@ -20,19 +20,13 @@
         android:textColor="@android:color/holo_green_dark"
         android:textSize="18sp" />
 
-    <!-- Bottone centrale -->
-    <Button
-        android:id="@+id/apiButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click for Api Call" />
 
     <Button
         android:id="@+id/activityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.21"
         android:background="@android:color/holo_blue_bright"
         android:paddingHorizontal="10dp"
         android:text="Go to another activity" />

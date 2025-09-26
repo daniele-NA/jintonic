@@ -16,6 +16,8 @@ android {
         targetSdk = rootProject.extra["target_version"] as Int
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -41,6 +43,10 @@ android {
 }
 
 dependencies {
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation( "androidx.test:core-ktx:1.5.0")
+
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.activity:activity:1.11.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.4")
