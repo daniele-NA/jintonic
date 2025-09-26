@@ -26,7 +26,7 @@ internal fun LOG(value: String?) {
 @SecureWindow
 class KotlinActivity : AppCompatActivity() {
 
-    @MinBattery(minOrEqualValue = 60)
+    @MinBattery(minOrEqualValue = 80)
     fun longOperation(){}
 
 

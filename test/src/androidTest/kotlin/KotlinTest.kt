@@ -48,6 +48,9 @@ class KotlinTest {
         }
     }
 
+    /*
+    Throws an Exception if the device is not rooted
+     */
     @Test
     fun root() {
         val scenario = launchActivity<KotlinActivity>()
