@@ -28,7 +28,7 @@ internal fun LOG(value: String?) {
 @SecureWindow
 class KotlinActivity : AppCompatActivity() {
 
- 
+
 
     @RequireInternet(mustThrow = true)
     @MinBattery(minOrEqualValue = 60)

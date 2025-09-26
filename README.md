@@ -1,6 +1,10 @@
 <div align="center">
     <img src="ASSETS/logo.svg" alt="Jintonic Logo" width="300" height="300" />
 </div>
+<div align="center">
+    <img src="ASSETS/graph.png" alt="Jintonic Logo" width="300" height="300" />
+</div>
+
 ````markdown
 # Tired of the Same Old Helper Classes?  
 
