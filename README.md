@@ -54,7 +54,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":com.crescenzi.jintonic:vX.Y.Z"))
+    implementation(":com.crescenzi.jintonic:vX.Y.Z")
 }
 ```
 
