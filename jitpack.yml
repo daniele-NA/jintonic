@@ -1,4 +1,4 @@
 jdk:
   - openjdk17
 install:
-  - ./gradlew :lib:assemble
+  - ./gradlew :lib:bundleReleaseAar
