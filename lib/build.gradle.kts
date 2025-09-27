@@ -3,18 +3,19 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("com.crescenzi.jintonic.gradle")  // TRANSITIVE
-    id("maven-publish")
+
+    id("com.crescenzi.jintonic.gradle")
+    id("maven-publish") // JITPACK
 }
 
+// JITPACK //
 afterEvaluate {
     publishing {
         publications {
             create("release", MavenPublication::class) {
                 groupId = "com.github.daniele-NA"
-                artifactId = "lib"
-                version = "1.0.2"
-
+                artifactId = "jintonic"
+                version = "1.0.1"
                 artifact("$buildDir/outputs/aar/lib-release.aar")
             }
         }
