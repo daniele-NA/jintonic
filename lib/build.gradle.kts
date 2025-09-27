@@ -12,11 +12,10 @@ afterEvaluate {
         publications {
             create("release", MavenPublication::class) {
                 groupId = "com.github.daniele-NA"
-                artifactId = "lib"                         // nome della libreria
-                version = "1.0.2"                          // versione corrente
+                artifactId = "lib"
+                version = "1.0.2"
 
-                // AAR generato dal plugin custom
-                artifact("$buildDir/drunk/release/lib-release.aar")
+                artifact("$buildDir/outputs/aar/lib-release.aar")
             }
         }
     }
