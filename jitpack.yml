@@ -2,7 +2,7 @@ jdk:
   - openjdk17
 
 install:
-  # Builda prima il modulo plugin se necessario
+  # Builda il plugin
   - ./gradlew :plugin:build
-  # Poi builda il modulo lib e genera l'AAR
-  - ./gradlew :lib:bundleReleaseAar
+  # Builda il lib e pubblicalo su Maven locale
+  - ./gradlew :lib:publishToMavenLocal
