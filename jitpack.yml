@@ -2,7 +2,5 @@ jdk:
   - openjdk17
 
 install:
-  # Builda il plugin
   - ./gradlew :plugin:build
-  # Builda il lib e pubblicalo su Maven locale
   - ./gradlew :lib:publishToMavenLocal

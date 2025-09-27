@@ -4,7 +4,24 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.crescenzi.jintonic.gradle")  // TRANSITIVE
+    id("maven-publish")
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            create("release", MavenPublication::class) {
+                groupId = "com.github.daniele-NA"
+                artifactId = "lib"                         // nome della libreria
+                version = "1.0.2"                          // versione corrente
+
+                // AAR generato dal plugin custom
+                artifact("$buildDir/drunk/release/lib-release.aar")
+            }
+        }
+    }
+}
+
 
 android {
     namespace = rootProject.extra["package"] as String
