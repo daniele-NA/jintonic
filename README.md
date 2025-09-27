@@ -57,6 +57,7 @@ dependencies {
     implementation(":com.crescenzi.jintonic:vX.Y.Z")
 }
 ```
+### Before use any annotation read the @Annotation src code to see which permissions are required
 
 ---
 
