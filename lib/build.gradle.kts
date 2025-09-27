@@ -12,7 +12,6 @@ android {
 
     defaultConfig {
         minSdk = rootProject.extra["min_version"] as Int
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -34,13 +33,6 @@ android {
     }
     buildFeatures {
         buildConfig = true
-    }
-
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
-            isReturnDefaultValues = true
-        }
     }
 }
 
