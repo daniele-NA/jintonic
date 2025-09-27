@@ -1,22 +1,22 @@
+# Tired of the Same Old Helper Classes?
+
 <div align="center">
-    <img src="ASSETS/logo.svg" alt="Jintonic Logo" width="300" height="300" />
-</div>
-<div align="center">
-    <img src="ASSETS/graph.png" alt="Jintonic Logo" width="300" height="300" />
+  <img src="ASSETS/logo.svg" alt="Jintonic Logo" width="600" />
 </div>
 
-````markdown
-# Tired of the Same Old Helper Classes?  
-
-Jintonic is the **first Android library fully based on AOP (Aspect-Oriented Programming)**. It allows you to **hook and weave behavior at build time** directly into your `.class` files via Gradle plugins.  
+<p style="font-size:18px; text-align:center;">
+  <b>Jintonic</b> is the <b>first Android library fully based on AOP (Aspect-Oriented Programming)</b>.<br/><br>
+  It allows you to <b>hook and weave behaviors at build time</b> directly into your <code>.class</code> files through Gradle plugins.
+</p>
 
 
 
 ---
 
-## Features
+## ✨ Features
 
-- **Easy-to-use annotations** for common checks and behaviors:
+- **Easy-to-use annotations** for checks and safety:
+
 ```kotlin
 @RequireInternet(mustThrow = true)
 @MinBattery(minOrEqualValue = 60)
@@ -36,17 +36,17 @@ fun vpnMethod() {
 fun rootMethod() {
     LOG("Inside root method")
 }
-````
+```
 
-* **Hook and intercept methods** with zero boilerplate
-* **Build-time weaving** for optimized performance
-* **Full control over cross-cutting concerns** like logging, validation, and execution policies
+- ✅ Hook and intercept methods with zero boilerplate
+- ⚡ Build-time weaving for optimized performance
+- 🔧 Full control over **cross-cutting concerns** like logging, validation, and execution policies
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
-Import Jintonic in your project:
+Add Jintonic to your project:
 
 ```kotlin
 plugins {
@@ -54,15 +54,23 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":com.crescenzi.jintonic:v0.0.1"))
+    implementation(project(":com.crescenzi.jintonic:vX.Y.Z"))
 }
 ```
 
 ---
 
-## Contributing
+## 🔍 How it works?
 
-We welcome contributions! Here's how you can get started:
+<div align="center">
+  <img src="ASSETS/graph.png" alt="Jintonic Graph" width="500" />
+</div>
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
 
 ```bash
 # Clone the repo
@@ -74,14 +82,13 @@ cd jintonic
 ./gradlew test
 ```
 
-* Open issues for bugs or feature requests
-* Fork the repo, make your changes, and submit a pull request
-* Follow the existing coding style and keep commits clean and descriptive
+- Open issues for bugs or feature requests
+- Fork the repo, make your changes, and submit a PR
+- Follow the existing coding style and keep commits clean and descriptive
 
 ---
 
-## License
+## 📄 License
 
-This project is **open source**. Check the LICENSE file for details.
-
-```
+This project is **open source** under the **GNU GPL v3 license**.  
+See the **LICENSE** file for details.
