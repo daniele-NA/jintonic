@@ -57,9 +57,17 @@ dependencies {
     implementation(":com.crescenzi.jintonic:vX.Y.Z")
 }
 ```
-### Before use any annotation read the @Annotation src code to see which permissions are required
 
 ---
+
+## ⚠️ What I Have to Know
+
+- Not all annotations require Android permissions.
+- Some checks (like `@RequireInternet` or `@RequireVpn`) may need specific permissions, while others don’t.
+- 👉 Before using any annotation, **read its source code** in the repository to understand exactly which permissions (if any) are required.
+
+---
+
 
 ## 🔍 How it works?
 
