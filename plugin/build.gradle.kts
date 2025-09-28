@@ -32,6 +32,9 @@ gradlePlugin {
             implementationClass ="com.crescenzi.jintonic.gradle.JinPlugin"
 
             //GRADLE PORTAL
+
+            // Keys under .username/.gradle/gradle.properties
+
             displayName = "Jintonic Gradle Plugin"
             description = "AOP Weaving gradle plugin"
             group = "com.crescenzi.jintonic"
