@@ -35,6 +35,8 @@ gradlePlugin {
 
             // Keys under .username/.gradle/gradle.properties
 
+            // Published with   ./gradlew :plugin:publishPlugins
+
             displayName = "Jintonic Gradle Plugin"
             description = "AOP Weaving gradle plugin"
             group = "com.crescenzi.jintonic"
