@@ -41,7 +41,7 @@ gradlePlugin {
             version = "1.0.0"
             website ="https://github.com/daniele-NA/jintonic"
             vcsUrl = "https://github.com/daniele-NA/jintonic"
-            tags = listOf("aop", "aspectj", "weaving", "android", "gradle")
+            tags= listOf("aop", "aspectj", "weaving", "android")
         }
     }
 }
