@@ -2,6 +2,8 @@
 plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
+
+    id("com.gradle.plugin-publish") version "1.2.1" //GRADLE PORTAL
 }
 
 /**
@@ -28,6 +30,15 @@ gradlePlugin {
         create("JinPlugin") {
             id ="com.crescenzi.jintonic.gradle"
             implementationClass ="com.crescenzi.jintonic.gradle.JinPlugin"
+
+            //GRADLE PORTAL
+            displayName = "Jintonic Gradle Plugin"
+            description = "AOP Weaving gradle plugin"
+            group = "com.crescenzi.jintonic"
+            version = "1.0.0"
+            website ="https://github.com/daniele-NA/jintonic"
+            vcsUrl = "https://github.com/daniele-NA/jintonic"
+            tags = listOf("aop", "aspectj", "weaving", "android", "gradle")
         }
     }
 }
