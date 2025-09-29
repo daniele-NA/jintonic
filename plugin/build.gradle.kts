@@ -39,7 +39,7 @@ gradlePlugin {
 
             displayName = "Jintonic Gradle Plugin"
             description = "AOP Weaving gradle plugin"
-            group = "com.crescenzi.jintonic"
+            group = "io.github.daniele-NA"
             version = "1.0.0"
             website ="https://github.com/daniele-NA/jintonic"
             vcsUrl = "https://github.com/daniele-NA/jintonic"
