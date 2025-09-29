@@ -4,7 +4,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 
-    id("com.crescenzi.jintonic.gradle")
+    id("io.github.daniele-NA.gradle")
     id("maven-publish") // JITPACK
 }
 

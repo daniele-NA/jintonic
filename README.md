@@ -50,7 +50,7 @@ Add Jintonic to your project:
 
 ```kotlin
 plugins {
-    id("com.crescenzi.jintonic.gradle") version "X.Y.Z"
+    id("io.github.daniele-NA.gradle") version "X.Y.Z"
 }
 
 dependencies {
