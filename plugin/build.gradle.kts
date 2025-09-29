@@ -28,7 +28,7 @@ dependencies {
 gradlePlugin {
     plugins {
         create("JinPlugin") {
-            id ="com.crescenzi.jintonic.gradle"
+            id ="io.github.daniele-NA.gradle"
             implementationClass ="com.crescenzi.jintonic.gradle.JinPlugin"
 
             //GRADLE PORTAL
