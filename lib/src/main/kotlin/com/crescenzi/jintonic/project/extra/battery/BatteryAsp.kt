@@ -3,6 +3,7 @@
 package com.crescenzi.jintonic.project.extra.battery
 
 import android.content.Context
+import com.crescenzi.jintonic.common.LOG_INFO
 import com.crescenzi.jintonic.common.Values._ID
 import com.crescenzi.jintonic.common.extension.getJintonicDecorator
 import com.crescenzi.jintonic.data.DeviceRepo.application

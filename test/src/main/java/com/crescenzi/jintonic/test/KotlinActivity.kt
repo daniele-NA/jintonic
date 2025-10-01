@@ -26,8 +26,16 @@ internal fun LOG(value: String?) {
 @SecureWindow
 class KotlinActivity : AppCompatActivity() {
 
-    @MinBattery(minOrEqualValue = 80)
-    fun longOperation(){}
+    init {
+        System.loadLibrary("jintonic")
+    }
+
+    @MinBattery(minOrEqualValue = 90)
+    external fun tryNative()
+
+    @MinBattery(minOrEqualValue = 90)
+    fun longOperation() {
+    }
 
 
     @RequireInternet()
@@ -60,6 +68,7 @@ class KotlinActivity : AppCompatActivity() {
         activityButton.setOnClickListener {
             startActivity(Intent(this@KotlinActivity, JavaActivity::class.java))
             this@KotlinActivity.finish()
+            LOG("Executed")
         }
 
 
