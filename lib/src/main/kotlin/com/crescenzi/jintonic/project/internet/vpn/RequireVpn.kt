@@ -9,7 +9,7 @@ Permissions required :
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 
-If a VPN is active in the annotated method, an exception will be thrown.
+If a VPN is not active in the annotated method, an exception will be thrown.
 
  */
 annotation class RequireVpn

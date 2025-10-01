@@ -30,7 +30,7 @@ class KotlinActivity : AppCompatActivity() {
     fun longOperation(){}
 
 
-    @RequireInternet(mustThrow = true)
+    @RequireInternet()
     fun kotlinApiCall() = "Kotlin Api call done successfully"
 
     @Timed

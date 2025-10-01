@@ -6,8 +6,6 @@ import com.crescenzi.jintonic.BuildConfig
  * LIB CONSTANTS
  */
 internal object Values {
-    internal const val tag = "JINTONIC"
-    internal const val defaultValueForThrowParam = true
-    internal const val id = BuildConfig.LIBRARY_PACKAGE_NAME
-
+    internal const val _TAG = "JINTONIC"
+    internal const val _ID = BuildConfig.LIBRARY_PACKAGE_NAME
 }

@@ -3,7 +3,7 @@
 package com.crescenzi.jintonic.common
 
 import android.util.Log
-import com.crescenzi.jintonic.common.Values.tag
+import com.crescenzi.jintonic.common.Values._TAG
 import com.crescenzi.jintonic.BuildConfig
 
 /**
@@ -11,6 +11,6 @@ import com.crescenzi.jintonic.BuildConfig
  */
 internal fun LOG_INFO(value: String?) {
     if (BuildConfig.DEBUG) {
-        Log.wtf(tag, value.toString())
+        Log.wtf(_TAG, value.toString())
     }
 }

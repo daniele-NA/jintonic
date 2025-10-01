@@ -4,9 +4,7 @@ package com.crescenzi.jintonic.project.security.screen
 
 import android.app.Activity
 import android.view.WindowManager
-import com.crescenzi.jintonic.common.LOG_INFO
-import com.crescenzi.jintonic.common.Values.id
-import com.crescenzi.jintonic.domain.exceptions.drunk
+import com.crescenzi.jintonic.common.Values._ID
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
@@ -16,7 +14,7 @@ import org.aspectj.lang.annotation.Pointcut
 class SecureWindowAsp {
 
 
-    @Pointcut("within(@$id.project.security.screen.SecureWindow * )")
+    @Pointcut("within(@$_ID.project.security.screen.SecureWindow * )")
     fun decoratedActivity() {
     }
 

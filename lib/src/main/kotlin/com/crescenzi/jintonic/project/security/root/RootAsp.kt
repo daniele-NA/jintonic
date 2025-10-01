@@ -2,7 +2,7 @@
 package com.crescenzi.jintonic.project.security.root
 
 import com.crescenzi.jintonic.common.LOG_INFO
-import com.crescenzi.jintonic.common.Values.id
+import com.crescenzi.jintonic.common.Values._ID
 import com.crescenzi.jintonic.common.extension.getJintonicDecorator
 import com.crescenzi.jintonic.data.DeviceRepo
 import com.crescenzi.jintonic.domain.exceptions.JINTONIC_CODE
@@ -22,7 +22,7 @@ class RootAsp {
         LOG_INFO("DEVICE ROOTED : $isRooted")
     }
 
-    @Before("execution(@$id.project.security.root.WithRoot * *(..))")
+    @Before("execution(@$_ID.project.security.root.WithRoot * *(..))")
     fun checkRoot(joinPoint: JoinPoint) {
 
         val decorator = joinPoint.getJintonicDecorator<WithRoot>()

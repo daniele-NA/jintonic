@@ -3,7 +3,7 @@
 package com.crescenzi.jintonic.project.extra.battery
 
 import android.content.Context
-import com.crescenzi.jintonic.common.Values.id
+import com.crescenzi.jintonic.common.Values._ID
 import com.crescenzi.jintonic.common.extension.getJintonicDecorator
 import com.crescenzi.jintonic.data.DeviceRepo.application
 import com.crescenzi.jintonic.domain.exceptions.JINTONIC_CODE
@@ -15,7 +15,7 @@ import org.aspectj.lang.annotation.Before
 @Aspect
 class BatteryAsp {
 
-    @Before("execution(@$id.project.extra.battery.MinBattery * *(..))")
+    @Before("execution(@$_ID.project.extra.battery.MinBattery * *(..))")
     fun checkBattery(jp: JoinPoint) {
         val decorator = jp.getJintonicDecorator<MinBattery>()
         val bm = application.getSystemService(Context.BATTERY_SERVICE) as android.os.BatteryManager

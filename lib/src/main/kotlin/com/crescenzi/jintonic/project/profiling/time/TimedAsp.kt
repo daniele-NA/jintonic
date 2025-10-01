@@ -5,7 +5,7 @@ package com.crescenzi.jintonic.project.profiling.time
 
 import android.annotation.SuppressLint
 import com.crescenzi.jintonic.common.LOG_INFO
-import com.crescenzi.jintonic.common.Values.id
+import com.crescenzi.jintonic.common.Values._ID
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
@@ -14,7 +14,7 @@ import org.aspectj.lang.annotation.Aspect
 @Aspect
 class TimedAsp {
 
-    @Around("execution(@$id.project.profiling.time.Timed * *(..))")
+    @Around("execution(@$_ID.project.profiling.time.Timed * *(..))")
     fun measureTime(proceedingJoinPoint: ProceedingJoinPoint): Any? {
         val start = System.currentTimeMillis()
         val result = proceedingJoinPoint.proceed()
