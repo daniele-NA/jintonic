@@ -49,6 +49,10 @@ fun rootMethod() {
 Add Jintonic to your project:
 
 ```kotlin
+/*
+ ADD JITPACK REPO INTO settings.gradle
+ */
+
 plugins {
     id("io.github.daniele-NA.gradle") version "X.Y.Z"
 }
