@@ -1,5 +1,30 @@
 @file:Suppress("UnstableApiUsage", "UNCHECKED_CAST", "UseTomlInstead")
 
+
+/**
+ * The dependency `api("org.aspectj:aspectjrt:1.9.24")` works only for local builds.
+ *
+ * Since this is an Android library module (not a JVM module), `aspectjrt` is not automatically
+ * included in the consumer's classpath. To ensure the AAR works correctly for downstream users,
+ * we explicitly add it to the POM:
+ *
+ * pom {
+ *     withXml {
+ *         asNode().appendNode("dependencies").apply {
+ *             appendNode("dependency").apply {
+ *                 appendNode("groupId", "org.aspectj")
+ *                 appendNode("artifactId", "aspectjrt")
+ *                 appendNode("version", "1.9.24")
+ *                 appendNode("scope", "compile")
+ *             }
+ *         }
+ *     }
+ * }
+ *
+ * NOTE: If building the AAR locally, it will NOT work for consumers unless they also add:
+ * implementation("org.aspectj:aspectjrt:1.9.24")
+ */
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -18,6 +43,7 @@ afterEvaluate {
                 version = "1.0.1"
                 artifact("$buildDir/outputs/aar/lib-release.aar")
 
+                // ==== For aspectJ classpath ==== //
                 pom {
                     withXml {
                         asNode().appendNode("dependencies").apply {
