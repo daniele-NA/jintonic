@@ -16,7 +16,7 @@ afterEvaluate {
                 groupId = "com.github.daniele-NA"
                 artifactId = "jintonic"
                 version = "1.0.1"
-                artifact("$buildDir/outputs/aar/lib-release.aar")
+                //artifact("$buildDir/outputs/aar/lib-release.aar")
 
                 from(components["release"])
             }
