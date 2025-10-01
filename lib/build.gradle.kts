@@ -16,9 +16,20 @@ afterEvaluate {
                 groupId = "com.github.daniele-NA"
                 artifactId = "jintonic"
                 version = "1.0.1"
-                //artifact("$buildDir/outputs/aar/lib-release.aar")
+                artifact("$buildDir/outputs/aar/lib-release.aar")
 
-                from(components["release"])
+                pom {
+                    withXml {
+                        asNode().appendNode("dependencies").apply {
+                            appendNode("dependency").apply {
+                                appendNode("groupId", "org.aspectj")
+                                appendNode("artifactId", "aspectjrt")
+                                appendNode("version", "1.9.24")
+                                appendNode("scope", "compile")
+                            }
+                        }
+                    }
+                }
             }
         }
     }
