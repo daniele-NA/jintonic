@@ -17,6 +17,8 @@ afterEvaluate {
                 artifactId = "jintonic"
                 version = "1.0.1"
                 artifact("$buildDir/outputs/aar/lib-release.aar")
+
+                from(components["release"])
             }
         }
     }
