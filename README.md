@@ -46,15 +46,9 @@ fun rootMethod() {
 
 ## ⚠️ Known Limitation: Native Methods
 
-<div style="background-color:#fff3cd; border-left:4px solid #dda32a; padding:10px; margin:10px 0; border-radius:4px;">
 
-
-<p style="color: black">
 The current version of the Jintonic Gradle plugin performs AspectJ weaving on your Java/Kotlin classes.  
 However, **it does not yet properly handle native methods** (e.g., methods implemented in C/C++ via JNI). Attempting to weave aspects into classes with native methods may cause build errors or unexpected behavior.
-
-</p>
-</div>
 
 ### Suggested Improvement
 
