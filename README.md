@@ -44,21 +44,30 @@ fun rootMethod() {
 
 ---
 
-## 🚀 Getting Started
+## ⚠️ Known Limitation: Native Methods
 
-Add Jintonic to your project:
+<div style="background-color:#fff3cd; border-left:4px solid #dda32a; padding:10px; margin:10px 0; border-radius:4px;">
+
+
+<p style="color: black">
+The current version of the Jintonic Gradle plugin performs AspectJ weaving on your Java/Kotlin classes.  
+However, **it does not yet properly handle native methods** (e.g., methods implemented in C/C++ via JNI). Attempting to weave aspects into classes with native methods may cause build errors or unexpected behavior.
+
+</p>
+</div>
+
+### Suggested Improvement
+
+A recommended enhancement is to add a feature to **exclude specific packages or classes** from the weaving process.  
+This can prevent common errors caused by third-party libraries (such as `com.google.*` or `com.firebase.*`) and allows safer incremental adoption of AspectJ weaving.
+
+Example of a possible configuration once implemented:
 
 ```kotlin
-/*
- ADD JITPACK REPO INTO settings.gradle
- */
+jintonic {
 
-plugins {
-    id("io.github.daniele-NA.gradle") version "X.Y.Z"
-}
+    excludedPackages = listOf("com/google", "com/firebase")
 
-dependencies {
-    implementation(":com.crescenzi.jintonic:vX.Y.Z")
 }
 ```
 
