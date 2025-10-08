@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * Jintonic Gradle Plugin for AOP weaving via Android's bytecode pipeline.
  *
  * Steps:
- * 1. Redirect Kotlin/Java compile outputs.
+ * 1. Redirect Kotlin/Java compile outputs ( '/javac/<variant>/compileDebugJavaWithJavac' will be empty).
  * 2. Copy compiled classes to a staging directory.
  * 3. Perform AOP weaving on combined classes.
  * 4. Register as a bytecode generator so Android treats it as a formal build step.
