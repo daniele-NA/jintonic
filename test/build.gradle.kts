@@ -1,0 +1,61 @@
+@file:Suppress("UnstableApiUsage","UNCHECKED_CAST","UseTomlInstead","GradleDependency")
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
+    id("io.github.daniele-NA.gradle")
+}
+
+android {
+    namespace = ("${rootProject.extra["package"] as String}.test")
+    compileSdk = rootProject.extra["compile_version"] as Int
+
+    defaultConfig {
+        applicationId = ("${rootProject.extra["package"] as String}.test")
+        minSdk = rootProject.extra["min_version"] as Int
+        targetSdk = rootProject.extra["target_version"] as Int
+        versionCode = 1
+        versionName = "1.0"
+        testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            isShrinkResources = true
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = rootProject.extra["jvm_version"] as String
+    }
+    buildFeatures {
+        compose = true
+    }
+    externalNativeBuild{cmake{path=file("src/main/jni/CMakeLists.txt")}}
+}
+
+dependencies {
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation( "androidx.test:core-ktx:1.5.0")
+
+    implementation("androidx.core:core-ktx:1.17.0")
+    implementation("androidx.activity:activity:1.11.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.4")
+    implementation("androidx.activity:activity-compose:1.11.0")
+    implementation("androidx.compose.material3:material3:1.3.2")
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("com.google.android.material:material:1.13.0")
+
+
+    implementation(project(":lib"))
+}

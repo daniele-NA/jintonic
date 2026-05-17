@@ -1,0 +1,1 @@
+rootProject.name = "plugin" // TO AVOID MODULE ERRORS,EACH MODULE NEEDS settings.gradle
