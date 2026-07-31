@@ -47,7 +47,7 @@ Add the following to your **module-level `build.gradle.kts`** file:
 ```kotlin
 // MAKE SURE TO ADD JITPACK AND GRADLE PLUGIN REPO INTO SETTINGS.gradle //
 plugins {
-    id("io.github.daniele-NA.gradle") version "x.z.y"
+    id("io.github.d-crescenzi.gradle") version "x.z.y"
 }
 
 android {
@@ -55,7 +55,7 @@ android {
 }
 
 dependencies {
-    implementation("com.github.daniele-NA:jintonic:vX:Y:Z")  // DO NOT OMIT THE 'v' BEFORE VERSION
+    implementation("com.github.d-crescenzi:jintonic:vX:Y:Z")  // DO NOT OMIT THE 'v' BEFORE VERSION
 }
 ```
 
@@ -117,7 +117,7 @@ Contributions are welcome!
 
 ```bash
 # Clone the repo
-git clone https://github.com/daniele-NA/jintonic
+git clone https://github.com/d-crescenzi/jintonic
 cd jintonic
 
 # Build and test locally
