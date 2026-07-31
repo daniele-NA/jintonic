@@ -28,7 +28,7 @@ dependencies {
 gradlePlugin {
     plugins {
         create("JinPlugin") {
-            id ="io.github.daniele-NA.gradle"
+            id ="io.github.d-crescenzi.gradle"
             implementationClass ="com.crescenzi.jintonic.gradle.JinPlugin"
 
             //GRADLE PORTAL
@@ -39,10 +39,10 @@ gradlePlugin {
 
             displayName = "Jintonic Gradle Plugin"
             description = "AOP Weaving gradle plugin"
-            group = "io.github.daniele-NA"
+            group = "io.github.d-crescenzi"
             version = "1.0.0"
-            website ="https://github.com/daniele-NA/jintonic"
-            vcsUrl = "https://github.com/daniele-NA/jintonic"
+            website ="https://github.com/d-crescenzi/jintonic"
+            vcsUrl = "https://github.com/d-crescenzi/jintonic"
             tags= listOf("aop", "aspectj", "weaving", "android")
         }
     }

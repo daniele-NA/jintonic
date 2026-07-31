@@ -29,7 +29,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 
-    id("io.github.daniele-NA.gradle")
+    id("io.github.d-crescenzi.gradle")
     id("maven-publish") // JITPACK
 }
 
@@ -38,7 +38,7 @@ afterEvaluate {
     publishing {
         publications {
             create("release", MavenPublication::class) {
-                groupId = "com.github.daniele-NA"
+                groupId = "com.github.d-crescenzi"
                 artifactId = "jintonic"
                 version = "1.0.1"
                 artifact("$buildDir/outputs/aar/lib-release.aar")

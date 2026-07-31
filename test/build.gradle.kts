@@ -3,7 +3,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
-    id("io.github.daniele-NA.gradle")
+    id("io.github.d-crescenzi.gradle")
 }
 
 android {
