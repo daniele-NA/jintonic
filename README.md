@@ -50,10 +50,11 @@ plugins {
     id("io.github.d-crescenzi.gradle") version "x.z.y"
 }
 
-android {
-//........
-}
+// Note: Legacy plugin ID was "io.github.daniele-NA.gradle" (Owner: daniele-NA, Repo: https://github.com/daniele-NA/jintonic)
+```
 
+Dependencies:
+```kotlin
 dependencies {
     implementation("com.github.d-crescenzi:jintonic:vX:Y:Z")  // DO NOT OMIT THE 'v' BEFORE VERSION
 }
